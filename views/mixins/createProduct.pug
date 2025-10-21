@@ -1,0 +1,16 @@
+mixin createProduct(product)
+    .col-md-4
+        .card.my-3
+            img.card-img-top(src=`/img/${product.imageUrl}` alt=`${product.description}`)
+            .card-body
+                h4.card-title
+                    a(href="#") #{product.name}
+                
+                p.card-text.pt-2 #{product.description}
+                
+            .card-footer
+                small.text-muted #{product.price}
+                    i.fa-solid.fa-turkish-lira-sign 
+                
+                a.btn.btn-outline-primary.btn-sm.float-end(href="#") Add to Cart
+                    i.fa.fa-angle-double-right

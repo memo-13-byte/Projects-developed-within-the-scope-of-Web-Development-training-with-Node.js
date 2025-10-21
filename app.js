@@ -1,12 +1,23 @@
 const express = require('express');
 const app = express();
 
+// Service the static files
+app.use(express.static('public'));
+app.use('/fontawesome', express.static('fontawesome-free-7.1.0-web'));
+
+
+
 const path = require('path');
 
 const bodyParser = require('body-parser');
 
+app.set('view engine', 'pug');
+app.set('views', './views');
+
 const adminRoutes = require('./routes/admin');
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/shop');
+
+const errorController = require('./controllers/errors');
 
 // app.use((req, res, next) => {
 //     console.log('Middleware 1 is worked');
@@ -19,9 +30,7 @@ app.use('/admin', adminRoutes);
 app.use(userRoutes);
 
 
-app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-});
+app.use(errorController.get404Page);
 
 // app.get('/', (req, res) => {
 //     res.send('Hello Mark Hoffman');

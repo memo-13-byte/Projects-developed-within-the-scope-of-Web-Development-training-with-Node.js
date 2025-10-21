@@ -1,19 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-const path = require('path');
+const adminController = require('../controllers/admin');
 
-// /admin/add-product => GET
-router.get('/add-product', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
-});
+router.get('/add-product', adminController.getAddProduct);
 
-// /admin/add-product => POST
-router.post('/add-product', (req, res, next) => {
-    // database' e kayıt ve benzeri gibi işlemler burda yapılabilir.
-    console.log(req.body);
+router.post('/add-product', adminController.postAddProduct);
 
-    res.redirect('/');
-});
+router.get('/edit-product', adminController.getEditProduct);
+
+router.post('/edit-product', adminController.postEditProduct);
+
+router.get('/products', adminController.getProducts);
+
+router.get('/admin/products', adminController.getProducts);
 
 module.exports = router;
